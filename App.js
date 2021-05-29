@@ -2,23 +2,20 @@ import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Button, Alert } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import PButton from "./components/PButton.js";
+import PButton from "./components/StyledButton/index.js";
 import * as LocalAuthentication from "expo-local-authentication";
 import Storage from "./services/storage.js";
+import Header from "./components/Header";
+import NavBar from "./components/NavBar";
+import NotesList from "./components/NotesList";
+import colors from "./assets/colors.js"
+
 
 const Separator = () => <View style={styles.separator} />;
 
 export default function App() {
   const [data, setData] = useState("Brak autoryzacji");
   const [storage, setStorage] = useState();
-
-  //sprawdzenie czy jest w telefonie ustawione zabezpieczanie biometryczne
-  // useEffect(() => {
-  //   const GetData = async () => {
-  //     await LocalAuthentication.isEnrolledAsync().then((res) => setData(res));
-  //   };
-  //   GetData();
-  // }, []);
 
   const saveData = async () => {
     await Storage.storeData("data", { name: "alleluja" });
@@ -46,6 +43,42 @@ export default function App() {
 
   return (
     <LinearGradient
+      colors={[colors.gradient1, colors.gradient2]}
+      style={(styles.linearGradient, styles.container)}
+    >
+      <StatusBar barStyle="light-content"/>
+
+      <Header />
+      <NotesList />
+      <NavBar />
+    </LinearGradient>
+  );
+}
+
+const styles = StyleSheet.create({
+  linearGradient: {
+    flex: 1,
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 5,
+    paddingTop: 35,
+    paddingBottom: 80,
+  },
+
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  separator: {
+    marginVertical: 8,
+    borderBottomColor: "#737373",
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+});
+
+{
+  /*<LinearGradient
       colors={["#fbc2eb", "#a6c1ee"]}
       style={(styles.linearGradient, styles.container)}
     >
@@ -87,26 +120,5 @@ export default function App() {
       />
       {console.log(storage)}
       <StatusBar style="auto" />
-    </LinearGradient>
-  );
+      </LinearGradient>*/
 }
-
-const styles = StyleSheet.create({
-  linearGradient: {
-    flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
-    borderRadius: 5,
-  },
-
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  separator: {
-    marginVertical: 8,
-    borderBottomColor: "#737373",
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-});
