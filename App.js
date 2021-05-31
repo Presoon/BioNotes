@@ -1,20 +1,73 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Button, Alert } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import PButton from "./components/StyledButton/index.js";
+import { StyleSheet, View, Text } from "react-native";
+
 import * as LocalAuthentication from "expo-local-authentication";
 import Storage from "./services/storage.js";
-import Header from "./components/Header";
-import NavBar from "./components/NavBar";
-import NotesList from "./components/NotesList";
-import colors from "./assets/colors.js"
 
+import { NavigationContainer } from "@react-navigation/native";
+import MainNav from "./navigation/MainNav.js";
 
 const Separator = () => <View style={styles.separator} />;
+const authorize = async () => {
+  const result = await LocalAuthentication.authenticateAsync(
+    (options = {
+      promptMessage: "Zaloguj się do BioNotes!",
+      cancelLabel: "Anuluj",
+    })
+  ).then((res) => {
+    return res;
+  });
+  return result;
+};
 
 export default function App() {
-  const [data, setData] = useState("Brak autoryzacji");
+  const [isUserLogged, setIsUserLogged] = useState(false);
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    const login = async () => {
+      const available = await LocalAuthentication.isEnrolledAsync().then();
+      if (!available) {
+        setIsUserLogged(true);
+        return true;
+      }
+      if (!isUserLogged) {
+        const result = await authorize();
+        if (result?.success) {
+          setIsUserLogged(true);
+        } else {
+          if (result?.message) {
+            setMessage("Authorization Failed!" + result.message);
+          }
+        }
+      }
+    };
+    login();
+  }, [isUserLogged]);
+
+  return (
+    <>
+      {isUserLogged ? (
+        <NavigationContainer>
+          <MainNav />
+        </NavigationContainer>
+      ) : (
+        <Text>{message}</Text>
+      )}
+    </>
+  );
+}
+
+const styles = StyleSheet.create({
+  separator: {
+    marginVertical: 8,
+    borderBottomColor: "#737373",
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+});
+
+{
+  /*  const [data, setData] = useState("Brak autoryzacji");
   const [storage, setStorage] = useState();
 
   const saveData = async () => {
@@ -39,44 +92,8 @@ export default function App() {
         );
       }
     });
-  };
-
-  return (
-    <LinearGradient
-      colors={[colors.gradient1, colors.gradient2]}
-      style={(styles.linearGradient, styles.container)}
-    >
-      <StatusBar barStyle="light-content"/>
-
-      <Header />
-      <NotesList />
-      <NavBar />
-    </LinearGradient>
-  );
+  }; */
 }
-
-const styles = StyleSheet.create({
-  linearGradient: {
-    flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
-    borderRadius: 5,
-    paddingTop: 35,
-    paddingBottom: 80,
-  },
-
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  separator: {
-    marginVertical: 8,
-    borderBottomColor: "#737373",
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-});
-
 {
   /*<LinearGradient
       colors={["#fbc2eb", "#a6c1ee"]}

@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.appTitle}>BioNotes</Text>
-      <FontAwesomeIcon style={styles.menu} icon={faBars} size={35} color={'white'}/>
+      <FontAwesomeIcon icon={faBars} size={35} color={'white'}/>
     </View>
   );
 }

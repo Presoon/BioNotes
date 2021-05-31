@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
       flexDirection: "row",
       justifyContent: "space-between",
       width: "100%",
-      height: 35,
+      height: 45,
       zIndex: 100,
       paddingHorizontal: 20,
   },
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textTransform: "uppercase"
   },
-  menu: {},
+  
 });
 
 export default styles;

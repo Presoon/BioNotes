@@ -1,7 +1,8 @@
 import { StyleSheet } from "react-native";
 import colors from "../../assets/colors.js";
+import Constants from "expo-constants";
 const styles = StyleSheet.create({
-  notesContainer: {
+  listContainer: {
     display: "flex",
     width: "100%",
     zIndex: 200,
@@ -9,8 +10,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "center",
   },
-
-  noteCover: {
+  listCover: {
     width: "40%",
     marginHorizontal: 15,
     marginVertical: 15,
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.gray,
     padding: 20,
   },
-  title: {
+  listTitle: {
     marginLeft: 15,
     lineHeight: 30,
     fontSize: 20,
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: colors.darkGray,
   },
-  noteHeader: {
+  listHeader: {
     flexDirection: "row",
   },
 });
