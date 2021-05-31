@@ -10,6 +10,7 @@ import {
   faListAlt,
   faPlusCircle,
 } from "@fortawesome/free-solid-svg-icons";
+import AddNewItem from "../components/AddNewItem";
 
 
 
@@ -61,7 +62,7 @@ const MainNav = () => {
         />
         <Tab.Screen
           name="AddItem"
-          component={ToDoList}
+          component={AddNewItem}
           options={{
             tabBarIcon: ({ focused }) => (
               <View style={styles.navItem}>

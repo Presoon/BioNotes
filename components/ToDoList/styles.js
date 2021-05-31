@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   listCover: {
-    width: "40%",
+    width: "80%",
     marginHorizontal: 15,
     marginVertical: 15,
 
