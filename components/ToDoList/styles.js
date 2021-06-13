@@ -1,6 +1,7 @@
-import { StyleSheet } from "react-native";
-import colors from "../../assets/colors.js";
-import Constants from "expo-constants";
+import { StyleSheet } from 'react-native';
+import Constants from 'expo-constants';
+import colors from '../../assets/colors.js';
+
 const styles = StyleSheet.create({
   listContainer: {
     display: "flex",
@@ -29,6 +30,15 @@ const styles = StyleSheet.create({
   },
   listHeader: {
     flexDirection: "row",
+  },
+  noteButton: {
+    width: "40%",
+    marginHorizontal: 15,
+    marginVertical: 15,
+
+    borderRadius: 15,
+    backgroundColor: colors.gray,
+    padding: 20,
   },
 });
 

@@ -1,5 +1,6 @@
-import { StyleSheet } from "react-native";
-import colors from "../../assets/colors.js";
+import { StyleSheet } from 'react-native';
+import colors from '../../assets/colors.js';
+
 const styles = StyleSheet.create({
   notesContainer: {
     display: "flex",
@@ -11,7 +12,7 @@ const styles = StyleSheet.create({
   },
 
   noteCover: {
-    width: "40%",
+    width: "80%",
     marginHorizontal: 15,
     marginVertical: 15,
 
@@ -29,6 +30,16 @@ const styles = StyleSheet.create({
   },
   noteHeader: {
     flexDirection: "row",
+  },
+  noteButton: {
+    width: "40%",
+    marginHorizontal: 15,
+    marginVertical: 15,
+
+    borderRadius: 15,
+    backgroundColor: colors.gray,
+    padding: 20,
+    
   },
 });
 
