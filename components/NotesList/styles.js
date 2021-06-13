@@ -10,7 +10,11 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "center",
   },
-
+  buttonTitle: {
+    fontWeight: "bold",
+    margin: "auto",
+    color: colors.gradient1,
+  },
   noteCover: {
     width: "80%",
     marginHorizontal: 15,
@@ -39,7 +43,6 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: colors.gray,
     padding: 20,
-    
   },
 });
 

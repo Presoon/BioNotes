@@ -20,10 +20,16 @@ const styles = StyleSheet.create({
     backgroundColor: colors.gray,
     padding: 20,
   },
+  buttonTitle: {
+    fontWeight: "bold",
+    margin: "auto",
+    color: colors.gradient1,
+  },
   title: {
     marginLeft: 15,
     lineHeight: 30,
     fontSize: 20,
+    color: "white",
     fontWeight: "bold",
     borderBottomWidth: 1,
     borderBottomColor: colors.darkGray,

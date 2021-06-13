@@ -65,7 +65,7 @@ function NotesList() {
             await getNotes().then();
           }}
         >
-          <Text style={styles.chooseTitle}>REFRESH</Text>
+          <Text style={styles.buttonTitle}>REFRESH</Text>
         </Pressable>
         <Pressable
           style={styles.noteButton}
@@ -74,9 +74,9 @@ function NotesList() {
             await getNotes().then();
           }}
         >
-          <Text style={styles.chooseTitle}>DELETE ALL NOTES</Text>
+          <Text style={styles.buttonTitle}>DELETE ALL NOTES</Text>
         </Pressable>
-        {console.log("Renderuję notatki")}
+        
         {notes?.map((note, index) => (
           <NoteCover
             key={index}

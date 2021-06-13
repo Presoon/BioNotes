@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, View, Text, TextInput, Pressable } from "react-native";
+import { Button, View, Text, TextInput, Pressable, Alert } from "react-native";
 import styles from "./styles.js";
 import ContentContainer from "../ContentContainer/index.js";
 import { useState } from "react";
@@ -16,7 +16,7 @@ const AddNote = ({ navigation }) => {
   return (
     <ContentContainer>
       <View style={styles.Container}>
-        <Text style={styles.title}>ADD NOTE SCREEN</Text>
+        <Text style={styles.title}>ADD NEW NOTE</Text>
         <TextInput
           style={styles.input}
           placeholder="Note title"
@@ -38,10 +38,11 @@ const AddNote = ({ navigation }) => {
           style={styles.noteCover}
           onPress={async () => {
             await Notes.addNote(title, content).then();
+            Alert.alert("New Note", "Add new note successfully!");
             clearForm();
           }}
         >
-          <Text style={styles.chooseTitle}>NEW NOTE</Text>
+          <Text style={styles.buttonTitle}>ADD NOTE</Text>
         </Pressable>
       </View>
     </ContentContainer>

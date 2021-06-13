@@ -10,7 +10,11 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "center",
   },
-
+  buttonTitle: {
+    fontWeight: "bold",
+    margin: "auto",
+    color: colors.gradient1
+  },
   noteCover: {
     width: "40%",
     marginHorizontal: 15,
@@ -21,20 +25,20 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   title: {
+    color: "white",
     width: "70%",
     marginLeft: 45,
     marginTop: 30,
     lineHeight: 30,
     fontSize: 20,
     fontWeight: "bold",
-    
   },
-  taskListItem:{
-      width: "80%",
-      padding: 10,
-      backgroundColor: colors.gray,
-      borderRadius: 5,
-      margin: 5,
+  taskListItem: {
+    width: "80%",
+    padding: 10,
+    backgroundColor: colors.gray,
+    borderRadius: 5,
+    margin: 5,
   },
   input: {
     height: 50,

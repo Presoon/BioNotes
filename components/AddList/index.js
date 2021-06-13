@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import { Button, View, Text, TextInput, Pressable } from "react-native";
+import React, { useState } from "react";
+import { Button, View, Text, TextInput, Pressable, Alert } from "react-native";
 import styles from "./styles.js";
 import ContentContainer from "../ContentContainer/index.js";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
@@ -17,11 +17,10 @@ const AddList = ({ navigation }) => {
     setTasks([]);
   };
 
-
   return (
     <ContentContainer>
       <View style={styles.Container}>
-        <Text style={styles.title}>ADD LIST SCREEN</Text>
+        <Text style={styles.title}>ADD NEW LIST</Text>
         <TextInput
           style={styles.input}
           placeholder="List title"
@@ -42,6 +41,12 @@ const AddList = ({ navigation }) => {
           placeholder="Add to-do task"
           onChangeText={(text) => setTask(text)}
           value={task}
+          onSubmitEditing={() => {
+            var newTasks = [...tasks];
+            newTasks.push(task);
+            setTasks(newTasks);
+            setTask("");
+          }}
         />
         <View style={{ paddingTop: 30, paddingLeft: 10 }}>
           <Pressable
@@ -50,7 +55,6 @@ const AddList = ({ navigation }) => {
               newTasks.push(task);
               setTasks(newTasks);
               setTask("");
-              console.log(task);
             }}
           >
             <FontAwesomeIcon
@@ -65,10 +69,11 @@ const AddList = ({ navigation }) => {
           style={styles.noteCover}
           onPress={async () => {
             await listService.addList(title, tasks).then();
+            Alert.alert("New ToDo List", "Add new to-do list successfully!");
             clearForm();
           }}
         >
-          <Text style={styles.chooseTitle}>SAVE LIST</Text>
+          <Text style={styles.buttonTitle}>SAVE LIST</Text>
         </Pressable>
         <Pressable
           style={styles.noteCover}
@@ -77,7 +82,7 @@ const AddList = ({ navigation }) => {
             setTitle("");
           }}
         >
-          <Text style={styles.chooseTitle}>CLEAR ALL</Text>
+          <Text style={styles.buttonTitle}>CLEAR ALL</Text>
         </Pressable>
       </View>
     </ContentContainer>

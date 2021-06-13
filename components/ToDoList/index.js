@@ -1,11 +1,13 @@
-import React from 'react';
-import { Text, View, Pressable } from 'react-native';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faListAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
-import colors from '../../assets/colors.js';
-import styles from './styles.js';
-import ContentContainer from '../ContentContainer/index.js';
-
+import React from "react";
+import { Text, View, Pressable } from "react-native";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faListAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
+import colors from "../../assets/colors.js";
+import styles from "./styles.js";
+import ContentContainer from "../ContentContainer/index.js";
+import { useState } from "react";
+import { useEffect } from "react";
+import listService from "../../services/list-service";
 const ListCover = (props) => (
   <View style={styles.listCover}>
     <View style={styles.listHeader}>
@@ -15,55 +17,77 @@ const ListCover = (props) => (
         size={25}
         color={colors.primary}
       />
-      <Text style={styles.listTitle}>{`Lista ToDo ${props.title}`}</Text>
+      <Text style={styles.listTitle}>{`${props.title}`}</Text>
     </View>
+    {props.content?.map((task, index) => (
+      <Text style={styles.taskItem} key={index}>
+        - {task}
+      </Text>
+    ))}
 
-    <Text>This is example list description...</Text>
-    <Text>Click to show more info...</Text>
-
-    {/* Do poprawy na dwa kontenery obo siebie */}
-    <View style={{
-      position: 'absolute',
-      right: 20,
-      top: 35,
-    }}
+    <View
+      style={{
+        position: "absolute",
+        right: 20,
+        top: 25,
+      }}
     >
-      <FontAwesomeIcon
-        style={styles.icon}
-        icon={faTrash}
-        size={25}
-        color={colors.secondary}
-      />
+      <Pressable
+        onPress={async () => {
+          await listService.deleteList(props.id);
+          await props.refresh();
+        }}
+      >
+        <FontAwesomeIcon
+          style={styles.icon}
+          icon={faTrash}
+          size={25}
+          color={colors.secondary}
+        />
+      </Pressable>
     </View>
   </View>
 );
 
 function ToDoList() {
+  const [lists, setLists] = useState([]);
+  const getLists = async () => {
+    var newLists = await listService.getLists().then();
+    setLists(newLists);
+  };
+  useEffect(() => {
+    getLists();
+  }, []);
   return (
     <ContentContainer>
       <View style={styles.listContainer}>
         <Pressable
           style={styles.noteButton}
           onPress={async () => {
-            await getNotes().then();
+            await getLists().then();
           }}
         >
-          <Text style={styles.chooseTitle}>REFRESH</Text>
+          <Text style={styles.buttonTitle}>REFRESH</Text>
         </Pressable>
         <Pressable
           style={styles.noteButton}
           onPress={async () => {
-            await notesService.clearNotes().then();
-            await getNotes().then();
+            await listService.clearLists().then();
+            await getLists().then();
           }}
         >
-          <Text style={styles.chooseTitle}>DELETE ALL NOTES</Text>
+          <Text style={styles.buttonTitle}>DELETE ALL LISTS</Text>
         </Pressable>
-        {console.log("Renderuję listę")}
-        <ListCover title="1" />
-        <ListCover title="2" />
-        <ListCover title="3" />
-        <ListCover title="4" />
+        
+        {lists?.map((list, index) => (
+          <ListCover
+            key={index}
+            id={index}
+            refresh={getLists}
+            title={`${index + 1}. ${list.title}`}
+            content={list.tasks}
+          />
+        ))}
       </View>
     </ContentContainer>
   );

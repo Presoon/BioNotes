@@ -11,6 +11,11 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "center",
   },
+  buttonTitle: {
+    fontWeight: "bold",
+    margin: "auto",
+    color: colors.gradient1,
+  },
   listCover: {
     width: "80%",
     marginHorizontal: 15,
@@ -35,10 +40,16 @@ const styles = StyleSheet.create({
     width: "40%",
     marginHorizontal: 15,
     marginVertical: 15,
-
     borderRadius: 15,
     backgroundColor: colors.gray,
     padding: 20,
+  },
+  taskItem: {
+    fontWeight: "bold",
+    marginHorizontal: 20,
+    marginVertical: 7,
+    fontSize: 18,
+    color: "black",
   },
 });
 

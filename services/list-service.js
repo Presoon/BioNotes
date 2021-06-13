@@ -9,7 +9,6 @@ const addList = async (title, tasks) => {
     lists.push({ title: title, tasks: tasks });
   }
   await Storage.storeData("lists", lists);
-  console.log(lists);
 };
 
 const deleteList = async (id) => {
@@ -21,17 +20,16 @@ const deleteList = async (id) => {
   });
 
   await Storage.storeData("lists", newlists);
-  console.log(lists);
 };
 
-const getlists = async () => {
+const getLists = async () => {
   var lists = await Storage.getData("lists");
   return lists;
 };
 
-const clearlists = async () => {
+const clearLists = async () => {
   const lists = [];
   await Storage.storeData("lists", lists);
 };
 
-export default { addList, getlists, clearlists, deleteList };
+export default { addList, getLists, clearLists, deleteList };
